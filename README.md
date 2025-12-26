@@ -1,5 +1,6 @@
 ## demo app - for docker-compose crash course
 
+This repo is created based on the crash course I watched ([YouTube video](https://www.youtube.com/watch?v=SXwC9fSwct8)), and the corresponding custom image for JS application pushed to the Docker Hub ([`## prasanthntu/my-app`](https://hub.docker.com/r/prasanthntu/my-app)).
 
 ### With Docker
 
