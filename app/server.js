@@ -5,6 +5,7 @@ let MongoClient = require('mongodb').MongoClient;
 let bodyParser = require('body-parser');
 let app = express();
 
+// Providing the username and password for the MongoDB database as the environment variables, and use them to connect to the database.
 const DB_USER = process.env.MONGO_DB_USERNAME
 const DB_PASS = process.env.MONGO_DB_PWD
 
@@ -35,7 +36,7 @@ app.get('/fetch-data', function (req, res) {
     let db = client.db(databaseName);
 
     let myquery = { myid: 1 };
-
+    // Grabs the element with key: value pair (myid: 1) from the database and returns it.
     db.collection(collectionName).findOne(myquery, function (err, result) {
       if (err) throw err;
       response = result;
@@ -47,6 +48,7 @@ app.get('/fetch-data', function (req, res) {
   });
 });
 
+// Start the server and listen on port 3000.
 app.listen(3000, function () {
   console.log("app listening on port 3000!");
 });

@@ -1,0 +1,31 @@
+services: # List all our services we want to run
+
+  my-app: # Add our application as another service which will run our custom JS application in a container.
+    build: . # Since we do not have the image, we need to build it from the Dockerfile as a blueprint. We can build and run the image in one step using docker compose. Since we are in the same directory as the Dockerfile, we can use '.' to build the image from the Dockerfile.
+    ports: 
+      - 3000:3000 # Since our custom JS application is running on port 3000, we need to map it to the port 3000 on the host.
+    environment:
+      # Providing the username and password for the MongoDB database as the environment variables, and use them to connect to the database.
+      - MONGO_DB_USERNAME=admin
+      - MONGO_DB_PWD=supersecret
+    # We do not have to specify the depends_on mongodb here as our app does not connect to the db when it starts up. It only connects to the db when it is requested to fetch data from the db (via frontend).
+  
+  mongodb: # First service (container name of the service)
+  # configs for the service
+    image: mongo # Image to use for the service
+    ports: # List of ports to expose
+      - 27017:27017 # Map the port 27017 on the host to the port 27017 on the container
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=supersecret
+  
+  mongo-express:
+    image: mongo-express
+    ports:
+      - 8081:8081
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=supersecret
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+    depends_on:
+      - "mongodb"

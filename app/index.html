@@ -22,6 +22,7 @@
 <script>
     (async function init() {
         const cont = document.getElementById('container');
+        // When we load the index.html page, the front end sends a GET request to server.js backend and says fetch the data from the MongoDB database.
         const response = await fetch('http://localhost:3000/fetch-data', {
             method: "GET",
             headers: {
@@ -29,6 +30,7 @@
               'Content-Type': 'application/json'
             }
         });
+        // Grab the data from the response and parse it as JSON.
         const jsonResponse = await response.json();
         document.getElementById('dynamic').textContent = jsonResponse.data;
     })();
