@@ -10,7 +10,7 @@ services: # List all our services we want to run
       - MONGO_DB_PWD=supersecret
     # We do not have to specify the depends_on mongodb here as our app does not connect to the db when it starts up. It only connects to the db when it is requested to fetch data from the db (via frontend).
   
-  mongodb: # First service (container name of the service)
+  mongodb: # Second service (container name of the service)
   # configs for the service
     image: mongo # Image to use for the service
     ports: # List of ports to expose
@@ -19,7 +19,7 @@ services: # List all our services we want to run
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=supersecret
   
-  mongo-express:
+  mongo-express: # Third service
     image: mongo-express
     ports:
       - 8081:8081
