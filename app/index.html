@@ -23,7 +23,7 @@
     (async function init() {
         const cont = document.getElementById('container');
         // When we load the index.html page, the front end sends a GET request to server.js backend and says fetch the data from the MongoDB database.
-        const response = await fetch('http://localhost:3000/fetch-data', {
+        const response = await fetch('/fetch-data', {
             method: "GET",
             headers: {
               'Accept': 'application/json',
