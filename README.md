@@ -2,6 +2,8 @@
 
 This repo is created based on the crash course I watched ([YouTube video](https://www.youtube.com/watch?v=SXwC9fSwct8)), and the corresponding custom image for JS application pushed to the Docker Hub ([`## prasanthntu/my-app`](https://hub.docker.com/r/prasanthntu/my-app)).
 
+> **📝 Additional Resources:** For comprehensive Docker notes and concepts, see my [Docker Compose Documentation](https://prasanth.io/Knowledge/Tech-Science/Docker-Compose)
+
 ### With Docker
 
 #### To start the application
