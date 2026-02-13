@@ -33,6 +33,13 @@
         // Grab the data from the response and parse it as JSON.
         const jsonResponse = await response.json();
         document.getElementById('dynamic').textContent = jsonResponse.data;
+
+        // Fetch server info (server time, client IP, user-agent)
+        const infoRes = await fetch('/server-info');
+        const info = await infoRes.json();
+        document.getElementById('server-time').textContent = info.timestamp;
+        document.getElementById('client-ip').textContent = info.ip;
+        document.getElementById('user-agent').textContent = info.userAgent;
     })();
 </script>
 <body>
@@ -41,6 +48,10 @@
         <span>Some static data:  </span><h3 id="static">this is hard-coded in index.html</h3>
         <hr />
         <span>Data from MongoDB:  </span><h3 id="dynamic"></h3>
+        <hr />
+        <span>Server time:  </span><h3 id="server-time"></h3><br/>
+        <span>Your IP:  </span><h3 id="client-ip"></h3><br/>
+        <span>User-Agent:  </span><h3 id="user-agent"></h3>
         <hr />
     </div>
 </body>

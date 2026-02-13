@@ -18,7 +18,9 @@ app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname, "index.html"));
   });
 
-// when starting app locally, use "mongodb://admin:password@localhost:27017" URL instead
+// "mongodb" here refers to the service name defined in docker-compose.yaml, NOT localhost.
+// Docker Compose creates a shared network where services can reach each other by name,
+// so "mongodb" resolves to the MongoDB container's IP — no need to change this for local development.
 let mongoUrlDockerCompose = `mongodb://${DB_USER}:${DB_PASS}@mongodb`;
 
 // pass these options to mongo client connect request to avoid DeprecationWarning for current Server Discovery and Monitoring engine
@@ -27,6 +29,14 @@ let mongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true };
 // the following db and collection will be created on first connect
 let databaseName = "my-db";
 let collectionName = "my-collection";
+
+app.get('/server-info', function (req, res) {
+  res.json({
+    timestamp: new Date().toISOString(),
+    ip: req.ip,
+    userAgent: req.get('User-Agent') || 'Unknown'
+  });
+});
 
 app.get('/fetch-data', function (req, res) {
   let response = {};
